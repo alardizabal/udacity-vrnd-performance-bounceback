@@ -28,7 +28,7 @@ public class Trampoline : MonoBehaviour {
             //Particle effect
             pSystem.Play();
 
-            Debug.Log("Trampoline Hit");
+            Logger.Log("Trampoline Hit");
         }
 
     }
