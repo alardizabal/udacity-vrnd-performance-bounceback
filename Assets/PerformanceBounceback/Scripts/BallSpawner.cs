@@ -47,11 +47,10 @@ public GameObject GetPooledBall()
         ballsAmount++;
         ballPoolNum = ballsAmount - 1;
     }
-        Debug.Log(ballPoolNum);
+        Logger.Log(ballPoolNum);
         return pooledBalls[ballPoolNum];
 }
    	
-	// Update is called once per frame
 	void Update () {
         cooldown -= Time.deltaTime;
         if(cooldown <= 0)
@@ -63,6 +62,7 @@ public GameObject GetPooledBall()
 
     void SpawnBall()
     {
+        // todo - optimize
         GameObject selectedBall = BallSpawner.current.GetPooledBall();
         selectedBall.transform.position = transform.position;
         Rigidbody selectedRigidbody = selectedBall.GetComponent<Rigidbody>();

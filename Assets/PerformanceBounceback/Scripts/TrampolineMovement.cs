@@ -9,7 +9,6 @@ public class TrampolineMovement : MonoBehaviour {
     public float moveTime = 3f;
     private float time;
 	
-	// Update is called once per frame
 	void Update () {
         time += Time.deltaTime;
         if(time > moveTime)

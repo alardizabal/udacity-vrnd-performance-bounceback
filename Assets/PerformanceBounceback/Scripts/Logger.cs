@@ -18,4 +18,16 @@ public class Logger : MonoBehaviour
             Debug.Log(message);
         }
     }
+
+    public static void Log(int message)
+    {
+        if (!isDebugging)
+        {
+            return;
+        }
+        else
+        {
+            Debug.Log(message);
+        }
+    }
 }
