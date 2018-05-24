@@ -7,8 +7,13 @@ public class Score : MonoBehaviour {
 
     public GameManager gameManager;
     public Text text;
+    private int previousScore;
 
 	void Update () {
-        text.text = "Score: " + gameManager.score.ToString();
+        if (previousScore != gameManager.score)
+        {
+            previousScore = gameManager.score;
+            text.text = "Score: " + gameManager.score.ToString();
+        }
 	}
 }

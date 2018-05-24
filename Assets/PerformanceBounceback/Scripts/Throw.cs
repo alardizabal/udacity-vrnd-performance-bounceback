@@ -7,12 +7,13 @@ public class Throw : MonoBehaviour
     private SteamVR_TrackedObject trackedObj;
     private SteamVR_Controller.Device device;
     public float throwForce = 2f;
-    
+    private Rigidbody rigidBody;
+
     void Start()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
-    
+
     void Update()
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
@@ -22,22 +23,21 @@ public class Throw : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Throwable"))
         {
+            rigidBody = col.GetComponent<Rigidbody>();
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
             {
                 Logger.Log("You have released the trigger");
 
                 //Multi Throwing
                 col.transform.SetParent(null);
-                Rigidbody rigidBody = col.GetComponent<Rigidbody>();
                 rigidBody.isKinematic = false;
-
                 rigidBody.velocity = device.velocity * throwForce;
                 rigidBody.angularVelocity = device.angularVelocity;
             }
             else if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
             {
                 Logger.Log("You are touching down the trigger on an object");
-                col.GetComponent<Rigidbody>().isKinematic = true;
+                rigidBody.isKinematic = true;
                 col.transform.SetParent(gameObject.transform);
 
                 device.TriggerHapticPulse(2000);

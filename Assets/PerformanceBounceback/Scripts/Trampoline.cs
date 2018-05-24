@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trampoline : MonoBehaviour {
+public class Trampoline : MonoBehaviour
+{
 
     public ParticleSystem pSystem;
     public GameManager scoreScript;
-    
-	void Start () {
-		
-	}
-	
-	void Update () {
-        pSystem = GetComponentInChildren<ParticleSystem>();
 
-	}
+    void Start()
+    {
+        pSystem = GetComponentInChildren<ParticleSystem>();
+    }
 
     void OnCollisionEnter(Collision col)
     {

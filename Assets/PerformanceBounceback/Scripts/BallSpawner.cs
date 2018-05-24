@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallSpawner : MonoBehaviour {
+public class BallSpawner : MonoBehaviour
+{
 
     public static BallSpawner current;
 
@@ -31,38 +32,38 @@ public class BallSpawner : MonoBehaviour {
         }
     }
 
-public GameObject GetPooledBall()
-{
-    ballPoolNum++;
-    if (ballPoolNum > (ballsAmount - 1))
+    public GameObject GetPooledBall()
     {
-        ballPoolNum = 0;
-    }
-    //if we’ve run out of objects in the pool too quickly, create a new one
-    if (pooledBalls[ballPoolNum].activeInHierarchy)
-    {
-        //create a new bullet and add it to the bulletList
-        GameObject obj = Instantiate(pooledBall);
-        pooledBalls.Add(obj);
-        ballsAmount++;
-        ballPoolNum = ballsAmount - 1;
-    }
+        ballPoolNum++;
+        if (ballPoolNum > (ballsAmount - 1))
+        {
+            ballPoolNum = 0;
+        }
+        //if we’ve run out of objects in the pool too quickly, create a new one
+        if (pooledBalls[ballPoolNum].activeInHierarchy)
+        {
+            //create a new bullet and add it to the bulletList
+            GameObject obj = Instantiate(pooledBall);
+            pooledBalls.Add(obj);
+            ballsAmount++;
+            ballPoolNum = ballsAmount - 1;
+        }
         Logger.Log(ballPoolNum);
         return pooledBalls[ballPoolNum];
-}
-   	
-	void Update () {
+    }
+
+    void Update()
+    {
         cooldown -= Time.deltaTime;
-        if(cooldown <= 0)
+        if (cooldown <= 0)
         {
             cooldown = cooldownLength;
             SpawnBall();
-        }		
-	}
+        }
+    }
 
     void SpawnBall()
     {
-        // todo - optimize
         GameObject selectedBall = BallSpawner.current.GetPooledBall();
         selectedBall.transform.position = transform.position;
         Rigidbody selectedRigidbody = selectedBall.GetComponent<Rigidbody>();
