@@ -5,7 +5,7 @@ using UnityEngine;
 public class Trampoline : MonoBehaviour
 {
 
-    public ParticleSystem pSystem;
+    private ParticleSystem pSystem;
     public GameManager scoreScript;
 
     void Start()
